@@ -1,235 +1,910 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Framed by Sixteen28 - Modern Frames, Classic Appeal</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Framed by Sixteen28</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #EE82EE; /* Violet */
+            --secondary-color: #FF7F50; /* Orange */
+            --accent-color-1: #FF69B4; /* Pink */
+            --accent-color-2: #FFD700; /* Yellow */
+            --accent-color-3: #1E90FF; /* Blue */
+            --light-color: #F9F9F9;
+            --dark-color: #333333;
+            --gray-color: #777777;
+            --light-gray: #EEEEEE;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Poppins', sans-serif;
+            --transition: all 0.3s ease;
+        }
 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--dark-color);
+            line-height: 1.6;
+            background-color: var(--light-color);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        h1 { font-size: 3.5rem; }
+        h2 {
+            font-size: 2.8rem;
+            text-align: center;
+_unused
+
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        h2:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            margin: 15px auto 0;
+            border-radius: 3px;
+        }
+
+        p { margin-bottom: 1rem; }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        a:hover { color: var(--secondary-color); }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        @keyframes flip {
+            0% { transform: perspective(400px) rotateY(0); }
+            100% { transform: perspective(400px) rotateY(360deg); }
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .logo {
+            height: 100px;
+        }
+
+        .main-nav {
+            display: flex;
+            list-style: none;
+        }
+
+        .main-nav li { margin-left: 35px; }
+
+        .main-nav a {
+            color: var(--dark-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .main-nav a:hover { color: var(--primary-color); }
+
+        .main-nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            bottom: -6px;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        .main-nav a:hover:after { width: 100%; }
+
+        .mobile-menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            color: var(--dark-color);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            min-height: 90vh;
+            align-items: center;
+            background-color: var(--light-gray);
+        }
+
+        .hero-content {
+            flex: 1;
+            padding: 40px;
+        }
+
+        .hero-content h1 {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            color: var(--gray-color);
+            max-width: 500px;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease-out 0.4s forwards;
+            opacity: 0;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-image {
+            flex: 1;
+            background: url('hero-image.jpg') no-repeat center/cover;
+            min-height: 90vh;
+        }
+
+        /* Collections Section */
+        .collections {
+            padding: 80px 0;
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            grid-auto-rows: minmax(200px, auto);
+        }
+
+        .collection-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            opacity: 0;
+        }
+
+        .collection-card.animate {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .collection-card:hover {
+            transform: scale(1.05);
+        }
+
+        .collection-image {
+            height: 180px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #6c757d;
+            font-weight: 600;
+        }
+
+        .collection-card h3 {
+            padding: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        /* New Arrivals Slider Section */
+        .new-arrivals {
+            padding: 80px 0;
+            background-color: var(--light-gray);
+        }
+
+        .new-arrivals-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .new-arrivals-slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .new-arrival-item {
+            flex: 0 0 33.33%;
+            padding: 0 15px;
+            box-sizing: border-box;
+            text-align: center;
+            perspective: 1000px;
+            opacity: 0;
+        }
+
+        .new-arrival-item.animate {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        .new-arrival-item-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .new-arrival-item:hover .new-arrival-item-inner {
+            animation: flip 1s ease-in-out;
+        }
+
+        .new-arrival-item img {
+            max-width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            border: 3px solid var(--primary-color);
+        }
+
+        .new-arrival-item h3 {
+            margin: 1rem 0 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .new-arrival-item .price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .new-arrival-prev, .new-arrival-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            border-radius: 50%;
+        }
+
+        .new-arrival-prev { left: 15px; }
+        .new-arrival-next { right: 15px; }
+
+        .new-arrival-prev:hover, .new-arrival-next:hover {
+            background: linear-gradient(to right, var(--secondary-color), var(--primary-color));
+        }
+
+        /* Featured Products Section */
+        .featured-products {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .product-container {
+            overflow-x: auto;
+            display: flex;
+            gap: 20px;
+            padding-bottom: 20px;
+        }
+
+        .product-card {
+            flex: 0 0 300px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: var(--transition);
+            opacity: 0;
+        }
+
+        .product-card.animate:nth-child(odd) {
+            animation: slideInLeft 0.8s ease-out forwards;
+        }
+
+        .product-card.animate:nth-child(even) {
+            animation: slideInRight 0.8s ease-out forwards;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            height: 220px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: #6c757d;
+        }
+
+        .product-card h3 {
+            padding: 1rem 1rem 0.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .price {
+            padding: 0 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .product-actions {
+            padding: 0 1rem 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .try-on-btn, .add-to-cart-btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: 2px solid var(--dark-color);
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-body);
+        }
+
+        .try-on-btn {
+            background: white;
+            color: var(--dark-color);
+        }
+
+        .try-on-btn:hover {
+            background: var(--dark-color);
+            color: white;
+        }
+
+        .add-to-cart-btn {
+            background: var(--dark-color);
+            color: white;
+        }
+
+        .add-to-cart-btn:hover {
+            background: #555;
+            transform: scale(1.05);
+        }
+
+        /* Promo Banners */
+        .promo-banners {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+
+        .promo-banner {
+            background: var(--dark-color);
+            color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: var(--transition);
+            opacity: 0;
+        }
+
+        .promo-banner.animate {
+            animation: bounce 0.6s ease-out forwards;
+        }
+
+        .promo-banner:hover {
+            animation: bounce 0.6s ease;
+        }
+
+        .promo-banner h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .promo-banner p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .promo-bogo {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        }
+
+        .promo-student {
+            background: linear-gradient(135deg, var(--accent-color-3) 0%, var(--accent-color-1) 100%);
+        }
+
+        /* Email Signup */
+        .email-signup {
+            padding: 60px 0;
+            text-align: center;
+            background: white;
+        }
+
+        .signup-content {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .email-signup h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .signup-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 450px;
+            margin: 0 auto;
+        }
+
+        .signup-form input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: var(--font-body);
+            transition: var(--transition);
+        }
+
+        .signup-form input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            transform: scale(1.02);
+        }
+
+        .signup-form button {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-body);
+        }
+
+        .signup-form button:hover {
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 0;
+            background: var(--light-gray);
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .contact-info h2 {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-info address {
+            font-style: normal;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--gray-color);
+        }
+
+        .contact-info address p {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info address i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        .hours {
+            margin-bottom: 2rem;
+        }
+
+        .hours h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hours p {
+            font-size: 1.1rem;
+            color: var(--gray-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+        }
+
+        .footer-logo p {
+            margin-top: 10px;
+            font-size: 0.95rem;
+            color: #aaa;
+        }
+
+        .logo-small { height: 80px; }
+
+        .footer-links h3,
+        .footer-newsletter h3 {
+            color: white;
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li { margin-bottom: 12px; }
+
+        .footer-links a { color: #ddd; }
+
+        .footer-links a:hover { color: var(--primary-color); }
+
+        .footer-newsletter p {
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+
+        #newsletter-form {
+            display: flex;
+        }
+
+        #newsletter-form input {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-family: var(--font-body);
+        }
+
+        #newsletter-form button {
+            background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-body);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 992px) {
+            h1 { font-size: 2.8rem; }
+            h2 { font-size: 2.2rem; }
+            .hero { flex-direction: column; min-height: auto; }
+            .hero-image { min-height: 50vh; }
+            .hero-content { padding: 20px; }
+            .new-arrival-item { flex: 0 0 50%; }
+        }
+
+        @media screen and (max-width: 768px) {
+            .main-nav { display: none; }
+            .mobile-menu-toggle { display: block; }
+            .main-nav.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                padding: 20px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+            .collection-grid { grid-template-columns: repeat(2, 1fr); }
+            .product-container { gap: 15px; }
+            .new-arrival-item { flex: 0 0 100%; }
+            .signup-form { flex-direction: column; max-width: 350px; }
+            .contact-content iframe { width: 100%; height: 200px; }
+        }
+
+        @media screen and (max-width: 480px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            .hero-content h1 { font-size: 2rem; }
+            .cta-button { padding: 12px 25px; }
+            .collection-grid { grid-template-columns: 1fr; }
+            .product-container { gap: 10px; }
+            .product-card { flex: 0 0 250px; }
+            .product-actions { flex-direction: column; }
+            #newsletter-form { flex-direction: column; }
+            #newsletter-form input,
+            #newsletter-form button {
+                width: 100%;
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+            .contact-info h2 { font-size: 2rem; }
+            .contact-content iframe { height: 150px; }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <div class="header-container">
-            <div class="logo-container">
-                <img src="logo-modified.png" alt="Sixteen28 Logo" class="logo">
-            </div>
-            <nav>
-                <ul class="main-nav">
+        <div class="container">
+            <div class="header-container">
+                <img src="logo-modified.png" alt="Framed by Sixteen28 Logo" class="logo">
+                <nav class="main-nav">
                     <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#team">Frames</a></li>
                     <li><a href="#collections">Collections</a></li>
+                    <li><a href="#new-arrivals">New Arrivals</a></li>
+                    <li><a href="#products">Frames</a></li>
                     <li><a href="#contact">Contact</a></li>
-                </ul>
-                <div class="mobile-menu-toggle">
-                    <i class="fas fa-bars"></i>
+                    <li><a href="shop.html">Shop</a></li>
+                </nav>
+                <div class="cart-icon">
+                    <a href="cart.html"><i class="fa-solid fa-cart-shopping" style="font-size: 25px;"></i></a>
                 </div>
-            </nav>
+                <div class="mobile-menu-toggle">☰</div>
+            </div>
         </div>
     </header>
 
-  <section class="hero" id="home">
-    <video class="hero-video" autoplay muted loop playsinline>
-        <source src="hero-video.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-        <h1>Expert Eyewear Consultants</h1>
-        <p>Discover your perfect look with our personalized style guidance</p>
-        <a href="#team" class="cta-button">Explore</a>
-    </div>
-</section>
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Style Your Vision</h1>
+            <p>Explore premium eyewear that blends modern design with timeless elegance</p>
+            <a href="#new-arrivals" class="cta-button">Discover New Arrivals</a>
+        </div>
+        <div class="hero-image"></div>
+    </section>
 
+    <section class="collections" id="collections">
+        <div class="container">
+            <h2>Shop by Category</h2>
+            <div class="collection-grid">
+                <div class="collection-card" data-category="mens">
+                    <div class="collection-image"><img src="glasses28.jpg" alt=""></div>
+                    <h3>Men's Glasses</h3>
+                </div>
+                <div class="collection-card" data-category="womens">
+                    <div class="collection-image">
+                        <img src="glasses30.jpg" alt="">
+                    </div>
+                    <h3>Women's Glasses</h3>
+                </div>
+                <div class="collection-card" data-category="sun">
+                    <div class="collection-image"><img src="glasses1671.jpg" alt=""></div>
+                    <h3>Sun Glasses</h3>
+                </div>
+                <div class="collection-card" data-category="blue-light">
+                    <div class="collection-image"><img src="glasses140.jpg" alt=""></div>
+                    <h3>Blue Light Glasses</h3>
+                </div>
+                <div class="collection-card" data-category="kids">
+                     <div class="collection-image"><img src="glasses44.jpg" alt=""></div>
+                    <h3>Kids Eyewear</h3>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <section class="new-arrivals" id="new-arrivals">
+        <div class="container">
+            <h2>New Arrivals</h2>
+            <div class="new-arrivals-container">
+                <div class="new-arrivals-slider">
+                    <div class="new-arrival-item">
+                        <div class="new-arrival-item-inner">
+                            <div class="product-image"><img src="glasses121.jpg" alt=""></div>
+                            <h3>Trendy Oval Frames</h3>
+                            <div class="price">$100</div>
+                        </div>
+                    </div>
+                    <div class="new-arrival-item">
+                        <div class="new-arrival-item-inner">
+                            <div class="product-image"><img src="glasses188.jpg" alt=""></div>
+                            <h3>Chic Rectangular Frames</h3>
+                            <div class="price">$100</div>
+                        </div>
+                    </div>
+                    <div class="new-arrival-item">
+                        <div class="new-arrival-item-inner">
+                            <div class="product-image"><img src="glasses52.jpg" alt=""></div>
+                            <h3>Bold Animal Print Frames</h3>
+                            <div class="price">$100</div>
+                        </div>
+                    </div>
+                    <div class="new-arrival-item">
+                        <div class="new-arrival-item-inner">
+                            <div class="product-image"><img src="glasses19.jpg" alt=""></div>
+                            <h3>Vibrant Colorful Frames</h3>
+                            <div class="price">$100</div>
+                        </div>
+                    </div>
+                </div>
+                <button class="new-arrival-prev">❮</button>
+                <button class="new-arrival-next">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="featured-products" id="products">
+        <div class="container">
+            <h2>Bestsellers</h2>
+            <div class="product-container">
+                <div class="product-card">
+                    <div class="product-image"><img src="glasses49.jpg" alt=""></div>
+                    <h3>Classic</h3>
+                    <div class="price">$100</div>
+                    <div class="product-actions">
+                        <!-- <button class="try-on-btn">Try On</button> -->
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image"><img src="glasses185.jpg" alt=""></div>
+                    <h3>Modern Square</h3>
+                    <div class="price">$100</div>
+                    <div class="product-actions">
+                        <!-- <button class="try-on-btn">Try On</button> -->
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image"><img src="glasses45.jpg" alt=""></div>
+                    <h3>Vintage Cat Eye</h3>
+                    <div class="price">$100</div>
+                    <div class="product-actions">
+                       
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image"><img src="shades.png" alt=""></div>
+                    <h3>Aviator Sunglasses</h3>
+                    <div class="price">$100</div>
+                    <div class="product-actions">
+                        <button class="add-to-cart-btn">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     
-
-    <section class="about-section" id="about">
-        <div class="container">
-            <h2>About Framed by Sixteen28</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>At Framed by Sixteen28, we believe that eyewear is more than just a visual aid—it's a statement of personal style and an extension of your identity. We combine fashion expertise with technical knowledge to help you find frames that not only complement your face shape and lifestyle but also express your unique personality.</p>
-                    <p>With our modern frames and classic appeal, we bridge the gap between contemporary design and timeless elegance, ensuring that your eyewear remains stylish regardless of changing trends.</p>
-                </div>
-                <div class="about-image">
-                    <img src="about-image.png" alt="Eyewear Selection">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="team-section" id="team">
-        <div class="container">
-            <!-- <h2>Our Eyewear Consultants</h2>
-            <p class="section-intro">Our experienced consultants are passionate about helping you find the perfect frames that match your style, personality, and vision needs.</p>
-            
-            <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="consultant1.png" alt="Sophia Chen">
-                    </div>
-                    <h3>Sophia Chen</h3>
-                    <p class="member-title">Senior Eyewear Stylist</p>
-                    <p class="member-bio">With over 10 years in the fashion industry, Sophia has an eye for matching frames to face shapes and personal style. She specializes in luxury and designer collections.</p>
-                </div>
-                
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="consultant2.png" alt="Marcus Johnson">
-                    </div>
-                    <h3>Marcus Johnson</h3>
-                    <p class="member-title">Technical Specialist</p>
-                    <p class="member-bio">Marcus combines technical expertise with a passion for comfort and functionality. He excels at finding the perfect fit and recommending lenses for specific needs.</p>
-                </div>
-                
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="consultant3.png" alt="Aisha Patel">
-                    </div>
-                    <h3>Aisha Patel</h3>
-                    <p class="member-title">Trendsetter & Style Advisor</p>
-                    <p class="member-bio">Always ahead of the curve, Aisha keeps our collections fresh and exciting. She loves helping clients step out of their comfort zone with bold, fashion-forward frames.</p>
-                </div>
-                
-                <div class="team-member">
-                    <div class="member-image">
-                        <img src="consultant4.png" alt="David Kim">
-                    </div>
-                    <h3>David Kim</h3>
-                    <p class="member-title">Classic Collection Expert</p>
-                    <p class="member-bio">David has a deep appreciation for timeless designs. If you're looking for frames with enduring appeal and sophisticated elegance, he's your go-to consultant.</p>
-                </div>
-            </div> -->
-               <section class="carousel-section" id="eyewear">
-            <div class="carousel-container">
-                <div class="carousel">
-                    <div class="carousel-item">
-                        <img src="glasses1.jpg" alt="Classic Aviator Glasses">
-                        <h3>Classic Aviator Glasses</h3>
-                        <p>Timeless style with a modern twist, perfect for any occasion.</p>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="glasses2.jpg" alt="Round Retro Frames">
-                        <h3>Round Retro Frames</h3>
-                        <p>Vintage-inspired design for a bold, artistic look.</p>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="glasses3.jpg" alt="Sleek Cat-Eye Glasses">
-                        <h3>Sleek Cat-Eye Glasses</h3>
-                        <p>Elegant and chic, ideal for a sophisticated style.</p>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="glasses4.jpg" alt="Bold Square Frames">
-                        <h3>Bold Square Frames</h3>
-                        <p>Make a statement with these modern, geometric frames.</p>
-                    </div>
-                </div>
-                <button class="carousel-prev">&#10094;</button>
-                <button class="carousel-next">&#10095;</button>
-            </div>
-        </section>
-        </div>
-    </section>
-
-    <section class="services-section" id="collections">
-        <div class="container">
-            <h2>Our Collections</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <h3>Designer Collection</h3>
-                    <p>Exclusive frames from top fashion houses and designers that make a bold statement.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-glasses"></i>
-                    </div>
-                    <h3>Classic Frames</h3>
-                    <p>Timeless styles that never go out of fashion, offering sophisticated elegance.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-palette"></i>
-                    </div>
-                    <h3>Bold & Colorful</h3>
-                    <p>Vibrant and unique frames for those who want to stand out and express their personality.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-child"></i>
-                    </div>
-                    <h3>Children's Selection</h3>
-                    <p>Durable, comfortable, and fun frames specially designed for younger faces.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-sun"></i>
-                    </div>
-                    <h3>Luxury Sunglasses</h3>
-                    <p>Premium sunglasses that combine style with optimal UV protection.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-running"></i>
-                    </div>
-                    <h3>Sports Eyewear</h3>
-                    <p>Performance frames designed for active lifestyles and various sporting activities.</p>
-                </div>
-    
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-eye"></i>
-                    </div>
-                    <h3>Prescription Eyewear</h3>
-                    <p>Custom prescription lenses fitted into your perfect frames with precision and care.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-gem"></i>
-                    </div>
-                    <h3>Eyewear Accessories</h3>
-                    <p>Premium cases, cleaning kits, chains, and other accessories to complement your eyewear.</p>
-                </div>
-
-                
-            </div>
-        </div>
-    </section>
-
-    <section class="testimonials-section">
-        <div class="container">
-            <h2>Why you should choose Sixteen28?</h2>
-            <div class="testimonials-slider">
-                <div class="testimonial">
-                    <p class="testimonial-text">"Our customers are our top priority, and we go above and beyond to ensure their satisfaction."</p>
-                  
-                </div>
-                
-                <div class="testimonial">
-                    <p class="testimonial-text">"We make customers feel confident and secure in their eyewear choices."</p>
-                  
-                </div>
-                
-                <div class="testimonial">
-                    <p class="testimonial-text">"Our personalized service and attention to detail is unmatched. As we understand that eyewear is both a medical need and a fashion statement."</p>
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact-section" id="contact">
+<section class="contact-section" id="contact">
         <div class="container">
             <div class="contact-content">
                 <div class="contact-info">
@@ -238,7 +913,10 @@
                         <p><i class="fas fa-map-marker-alt"></i> Hartland Road </p>
                         <p>St. James</p>
                         <p>Barbados</p>
-                        <p><i class="fas fa-phone"></i> 546-8464 / 264-2892</p>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3885.0820384910694!2d-59.63035575157511!3d13.15722505420935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8c43f10047e075b1%3A0x9fe22c0bf34da2f5!2sSixteen%2028!5e0!3m2!1sen!2s!4v1749948316646!5m2!1sen!2s" width="400" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                        <p style="padding-top:30;"><i class="fas fa-phone"></i> 546-8464 / 264-2892</p>
+
                         <p><i class="fas fa-envelope"></i>Sixteen28@icloud.com</p>
                     </address>
                     
@@ -256,73 +934,264 @@
                         <a href="#" aria-label="Pinterest"><i class="fab fa-pinterest-p"></i></a> -->
                     </div>
                 </div>
-                
-                <div class="contact-form">
-                    <h2>Book A Consultation</h2>
-                    <form id="consultation-form">
-                        <!-- <div class="form-group">
-                            <label for="name">Full Name</label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="message">What are you looking for?</label>
-                            <textarea id="message" name="message" rows="4"></textarea>
-                        </div>
-                        
-                        <button type="submit" class="submit-button">Request Appointment</button> -->
-                        <img src="framedbysixteen28qr.jpeg" style=" padding-left:70px; width: 90%; height: auto;" alt="Consultation Form" class="form-image">
-                    </form>
-                </div>
             </div>
         </div>
     </section>
 
+    <section class="email-signup">
+        <div class="container">
+            <div class="signup-content">
+               
+            </div>
+        </div>
+    </section>
+
+    
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-logo">
-                    <img src="logo-modified.png" alt="Sixteen28 Logo" class="logo-small">
+                    <img src="logo-modified.png" alt="Framed by Sixteen28" class="logo-small">
                     <p>Modern Frames, Classic Appeal</p>
                 </div>
-                
                 <div class="footer-links">
                     <h3>Quick Links</h3>
                     <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#team">Frames</a></li>
                         <li><a href="#collections">Collections</a></li>
+                        <li><a href="#new-arrivals">New Arrivals</a></li>
+                        <li><a href="#products">Frames</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
                 </div>
-                
-                <div class="footer-newsletter">
-                    <h3>Stay Updated</h3>
-                    <p>Please dont forget to follow us on instagram as well as like and share.</p>
-                    <!-- <form id="newsletter-form">
-                        <input type="email" placeholder="Your Email Address" required>
-                        <button type="submit">Subscribe</button>
-                    </form> -->
-                </div>
+             
             </div>
-            
             <div class="copyright">
-                <p>&copy; 2025 Framed by Sixteen28. All Rights Reserved.</p>
+                © 2025 Framed by Sixteen28. All Rights Reserved.
             </div>
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            const mainNav = document.querySelector('.main-nav');
+            
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.style.display = 'flex';
+                        mainNav.style.flexDirection = 'column';
+                        mainNav.style.position = 'absolute';
+                        mainNav.style.top = '100%';
+                        mainNav.style.left = '0';
+                        mainNav.style.width = '100%';
+                        mainNav.style.backgroundColor = 'white';
+                        mainNav.style.padding = '20px';
+                        mainNav.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+                    } else {
+                        mainNav.style.display = 'none';
+                    }
+                });
+            }
+
+            // Hero CTA button click
+            const ctaButton = document.querySelector('.cta-button');
+            if (ctaButton) {
+                ctaButton.addEventListener('click', function() {
+                    document.querySelector('#new-arrivals').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // Collection card clicks
+            const collectionCards = document.querySelectorAll('.collection-card');
+            collectionCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    console.log(`Navigate to ${category} collection`);
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+
+            // Try On and Add to Cart button clicks
+            const tryOnButtons = document.querySelectorAll('.try-on-btn');
+            const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+            
+            tryOnButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const productName = this.closest('.product-card').querySelector('h3').textContent;
+                    console.log(`Try on ${productName}`);
+                    this.style.background = '#4CAF50';
+                    this.textContent = 'Trying On...';
+                    setTimeout(() => {
+                        this.style.background = '';
+                        this.textContent = 'Try On';
+                    }, 2000);
+                });
+            });
+
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const productName = this.closest('.product-card').querySelector('h3').textContent;
+                    console.log(`Add ${productName} to cart`);
+                    this.style.background = '#4CAF50';
+                    this.textContent = 'Added!';
+                    setTimeout(() => {
+                        this.style.background = '';
+                        this.textContent = 'Add to Cart';
+                    }, 2000);
+                });
+            });
+
+            // Promo banner clicks
+            const promoBanners = document.querySelectorAll('.promo-banner');
+            promoBanners.forEach(banner => {
+                banner.addEventListener('click', function() {
+                    const promoType = this.classList.contains('promo-shipping') ? 'shipping' :
+                                    this.classList.contains('promo-bogo') ? 'bogo' : 'student';
+                    console.log(`Navigate to ${promoType} promotion`);
+                });
+            });
+
+            // Email signup form
+            const signupForm = document.querySelector('.signup-form');
+            if (signupForm) {
+                signupForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const email = this.querySelector('input[type="email"]').value;
+                    console.log(`Email signup: ${email}`);
+                    const button = this.querySelector('button');
+                    const originalText = button.textContent;
+                    button.style.background = '#4CAF50';
+                    button.textContent = 'Subscribed!';
+                    setTimeout(() => {
+                        button.style.background = '';
+                        button.textContent = originalText;
+                        this.querySelector('input').value = '';
+                    }, 3000);
+                });
+            }
+
+            // Newsletter form
+            const newsletterForm = document.getElementById('newsletter-form');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for subscribing to our newsletter!');
+                    newsletterForm.reset();
+                });
+            }
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                        if (mainNav.classList.contains('active')) {
+                            mainNav.classList.remove('active');
+                            mainNav.style.display = 'none';
+                        }
+                    }
+                });
+            });
+
+            // Header scroll effect
+            const header = document.querySelector('header');
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    header.style.transform = 'translateY(-100%)';
+                } else {
+                    header.style.transform = 'translateY(0)';
+                }
+                lastScrollTop = scrollTop;
+            });
+
+            // New Arrivals Slider functionality
+            const newArrivalsSlider = document.querySelector('.new-arrivals-slider');
+            const newArrivalPrev = document.querySelector('.new-arrival-prev');
+            const newArrivalNext = document.querySelector('.new-arrival-next');
+            const newArrivalItems = document.querySelectorAll('.new-arrival-item');
+            let newArrivalIndex = 0;
+            let visibleItems = window.innerWidth <= 768 ? 1 : window.innerWidth <= 992 ? 2 : 3;
+
+            function showNewArrivalSlide(index) {
+                if (index >= newArrivalItems.length - visibleItems + 1) {
+                    newArrivalIndex = 0;
+                } else if (index < 0) {
+                    newArrivalIndex = newArrivalItems.length - visibleItems;
+                } else {
+                    newArrivalIndex = index;
+                }
+                newArrivalsSlider.style.transform = `translateX(-${newArrivalIndex * (100 / visibleItems)}%)`;
+            }
+
+            if (newArrivalPrev && newArrivalNext) {
+                newArrivalPrev.addEventListener('click', () => {
+                    showNewArrivalSlide(newArrivalIndex - 1);
+                });
+                newArrivalNext.addEventListener('click', () => {
+                    showNewArrivalSlide(newArrivalIndex + 1);
+                });
+
+                let newArrivalAutoSlide = setInterval(() => {
+                    showNewArrivalSlide(newArrivalIndex + 1);
+                }, 4000);
+
+                newArrivalsSlider.addEventListener('mouseenter', () => {
+                    clearInterval(newArrivalAutoSlide);
+                });
+
+                newArrivalsSlider.addEventListener('mouseleave', () => {
+                    newArrivalAutoSlide = setInterval(() => {
+                        showNewArrivalSlide(newArrivalIndex + 1);
+                    }, 4000);
+                });
+
+                window.addEventListener('resize', () => {
+                    visibleItems = window.innerWidth <= 768 ? 1 : window.innerWidth <= 992 ? 2 : 3;
+                    showNewArrivalSlide(newArrivalIndex);
+                });
+            }
+
+            // Scroll animations
+            const observerOptions = {
+                threshold: 0.2,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate');
+                    }
+                });
+            }, observerOptions);
+
+            const animateElements = document.querySelectorAll('.collection-card, .product-card, .promo-banner, .new-arrival-item');
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
 </body>
 </html>

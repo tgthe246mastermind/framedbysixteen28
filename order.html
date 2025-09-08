@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Confirm Your Order - Gloria's</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --primary-color: #EE82EE; /* Violet */
+      --secondary-color: #FF7F50; /* Orange */
+      --accent-color-1: #FF69B4; /* Pink */
+      --accent-color-2: #FFD700; /* Yellow */
+      --accent-color-3: #1E90FF; /* Blue */
+      --light-color: #F9F9F9;
+      --dark-color: #333333;
+      --gray-color: #777777;
+      --light-gray: #EEEEEE;
+      --font-heading: 'Playfair Display', serif;
+      --font-body: 'Poppins', sans-serif;
+      --transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--light-color);
+      color: var(--dark-color);
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: var(--light-gray);
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+      font-family: var(--font-heading);
+    }
+
+    pre {
+      background: var(--light-color);
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 15px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: var(--gray-color);
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      background: var(--accent-color-1);
+      color: var(--light-color);
+      padding: 14px;
+      margin-top: 20px;
+      border-radius: 6px;
+      font-size: 18px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: var(--transition);
+    }
+
+    .btn:hover {
+      background: var(--accent-color-2);
+    }
+
+    .note {
+      margin-top: 15px;
+      font-size: 14px;
+      color: var(--gray-color);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Review Your Order</h1>
+    <pre id="orderDetails">Loading order...</pre>
+    <a id="whatsappBtn" class="btn" target="_blank">Continue on WhatsApp</a>
+    <p class="note">Please review before confirming on WhatsApp.</p>
+  </div>
+
+  <script>
+    // Get ?order= from URL
+    const params = new URLSearchParams(window.location.search);
+    const order = params.get("order");
+
+    if (order) {
+      const decoded = decodeURIComponent(order);
+      document.getElementById("orderDetails").textContent = decoded;
+
+      // WhatsApp number
+      const phone = "12462642892";  // Change if needed
+      const waLink = `https://wa.me/${phone}?text=${encodeURIComponent(decoded)}`;
+      document.getElementById("whatsappBtn").href = waLink;
+    } else {
+      document.getElementById("orderDetails").textContent = "No order details found.";
+      document.getElementById("whatsappBtn").style.display = "none";
+    }
+  </script>
+</body>
+</html>
