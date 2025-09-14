@@ -316,6 +316,8 @@
         cart.push({ id: glassesId, name, price, image });
         localStorage.setItem('cart', JSON.stringify(cart));
         window.location.href = 'cart.html';
+        // Note: Ensure cart.html redirects to order.html with the cart data, e.g.:
+        // window.location.href = `order.html?order=${encodeURIComponent(JSON.stringify(cart))}`;
     }
     </script>
 </body>
