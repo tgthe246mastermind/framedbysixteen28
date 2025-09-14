@@ -1,111 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Confirm Your Order - Gloria's</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    :root {
-      --primary-color: #EE82EE; /* Violet */
-      --secondary-color: #FF7F50; /* Orange */
-      --accent-color-1: #FF69B4; /* Pink */
-      --accent-color-2: #FFD700; /* Yellow */
-      --accent-color-3: #1E90FF; /* Blue */
-      --light-color: #F9F9F9;
-      --dark-color: #333333;
-      --gray-color: #777777;
-      --light-gray: #EEEEEE;
-      --font-heading: 'Playfair Display', serif;
-      --font-body: 'Poppins', sans-serif;
-      --transition: all 0.3s ease;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Your Order - Framed by Sixteen28</title>
+    <style>
+        :root {
+            --primary-color: #EE82EE;
+            --secondary-color: #FF7F50;
+            --accent-color-1: #FF69B4;
+            --accent-color-2: #FFD700;
+            --accent-color-3: #1E90FF;
+            --light-color: #F9F9F9;
+            --dark-color: #333333;
+            --gray-color: #777777;
+            --light-gray: #EEEEEE;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Poppins', sans-serif;
+            --transition: all 0.3s ease;
+        }
 
-    body {
-      font-family: var(--font-body);
-      background: var(--light-color);
-      color: var(--dark-color);
-      margin: 0;
-      padding: 0;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    .container {
-      max-width: 600px;
-      margin: 50px auto;
-      background: var(--light-gray);
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
+        body {
+            font-family: var(--font-body);
+            color: var(--dark-color);
+            line-height: 1.6;
+            background-color: var(--light-color);
+            padding: 20px;
+        }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-      color: var(--primary-color);
-      font-family: var(--font-heading);
-    }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
 
-    pre {
-      background: var(--light-color);
-      padding: 15px;
-      border-radius: 8px;
-      font-size: 15px;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-      color: var(--gray-color);
-    }
+        h1 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
 
-    .btn {
-      display: block;
-      width: 100%;
-      text-align: center;
-      background: var(--accent-color-1);
-      color: var(--light-color);
-      padding: 14px;
-      margin-top: 20px;
-      border-radius: 6px;
-      font-size: 18px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: var(--transition);
-    }
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
 
-    .btn:hover {
-      background: var(--accent-color-2);
-    }
+        a {
+            display: inline-block;
+            background-color: #25D366;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
 
-    .note {
-      margin-top: 15px;
-      font-size: 14px;
-      color: var(--gray-color);
-      text-align: center;
-    }
-  </style>
+        a:hover {
+            background-color: #1ebe57;
+        }
+
+        .order-image {
+            max-width: 200px;
+            display: block;
+            margin: 10px auto;
+            border-radius: 8px;
+        }
+
+        .error-message {
+            color: #d32f2f;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Review Your Order</h1>
-    <pre id="orderDetails">Loading order...</pre>
-    <a id="whatsappBtn" class="btn" target="_blank">Continue on WhatsApp</a>
-    <p class="note">Please review before confirming on WhatsApp.</p>
-  </div>
+    <div class="container">
+        <h1>Review Your Order</h1>
+        <p id="loadingMessage">Loading order...</p>
+        <div id="orderDetails"></div>
+        <a id="whatsappLink" href="#">Continue on WhatsApp</a>
+        <p>Please review before confirming on WhatsApp.</p>
+    </div>
+ <script type="text/javascript">
+    const orderDetails = document.getElementById('orderDetails');
+    const whatsappLink = document.getElementById('whatsappLink');
+    const loadingMessage = document.getElementById('loadingMessage');
 
-  <script>
-    // Get ?order= from URL
+    let orderText = 'No order details found.';
+    let orderObj = [];
+    let whatsappMessage = 'No order details available.';
+    const phone = '12462695025'; // REPLACE WITH YOUR WHATSAPP NUMBER
+
     const params = new URLSearchParams(window.location.search);
-    const order = params.get("order");
+    const encodedOrder = params.get('order');
 
-    if (order) {
-      const decoded = decodeURIComponent(order);
-      document.getElementById("orderDetails").textContent = decoded;
-
-      // WhatsApp number
-      const phone = "12462642892";  // Change if needed
-      const waLink = `https://wa.me/${phone}?text=${encodeURIComponent(decoded)}`;
-      document.getElementById("whatsappBtn").href = waLink;
-    } else {
-      document.getElementById("orderDetails").textContent = "No order details found.";
-      document.getElementById("whatsappBtn").style.display = "none";
+    if (encodedOrder) {
+        const decodedOrder = decodeURIComponent(encodedOrder);
+        try {
+            orderObj = JSON.parse(decodedOrder);
+            if (Array.isArray(orderObj) && orderObj.length > 0) {
+                orderText = orderObj.map(item => `$${item.price.toFixed(2)}`).join('<br>');
+                // ✅ Pair each price with its image link
+                whatsappMessage = orderObj.map(item =>
+                    `$${item.price.toFixed(2)} ${window.location.origin}/${item.image}`
+                ).join('\n');
+            } else {
+                orderText = 'Order is empty or invalid.';
+                orderDetails.insertAdjacentHTML('beforebegin', '<p class="error-message">Error: Invalid order data in URL.</p>');
+            }
+        } catch (e) {
+            console.warn('Failed to parse order as JSON:', e.message);
+            orderText = decodedOrder.replace(/\n/g, '<br>');
+            whatsappMessage = decodedOrder;
+            orderDetails.insertAdjacentHTML('beforebegin', '<p class="error-message">Warning: Order data is not in expected format. Displaying as text.</p>');
+        }
     }
-  </script>
+
+    // 🔄 Fallback only if no valid orderObj came from URL
+    if (!orderObj || !orderObj.length) {
+        const cart = JSON.parse(localStorage.getItem('cart')) || [];
+        if (cart.length > 0) {
+            orderObj = cart;
+            orderText = cart.map(item => `$${item.price.toFixed(2)}`).join('<br>');
+            // ✅ Pair each price with its image link
+            whatsappMessage = cart.map(item =>
+                `$${item.price.toFixed(2)} ${window.location.origin}/${item.image}`
+            ).join('\n');
+        } else if (!encodedOrder) {
+            orderDetails.insertAdjacentHTML('beforebegin', '<p class="error-message">Error: No order data found in URL or localStorage.</p>');
+        }
+    }
+
+    // Hide loading
+    loadingMessage.style.display = 'none';
+
+    // Show order details
+    orderDetails.innerHTML = orderText;
+
+    // ✅ Display images above order details
+    if (orderObj.length > 0) {
+        orderObj.forEach(item => {
+            if (item.image) {
+                const img = document.createElement('img');
+                img.src = item.image;
+                img.alt = 'Product image';
+                img.className = 'order-image';
+                orderDetails.insertAdjacentElement('beforebegin', img);
+            }
+        });
+    }
+
+    // WhatsApp link
+    const waLink = `https://wa.me/${phone}?text=${encodeURIComponent(whatsappMessage)}`;
+    whatsappLink.href = waLink;
+</script>
+
+
 </body>
 </html>
